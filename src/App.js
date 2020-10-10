@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Movie from './Movie';
 
 class App extends React.Component {
   state = {
@@ -8,21 +9,35 @@ class App extends React.Component {
   };
   getMovies = async () =>{
     const {data:{data:{movies}}} = await axios.get("https://yts-proxy.now.sh/list_movies.json");
-    // console.log(movies);
-    //1. axios로 불러와진 데이터는 처음에 어디에 담기지?
-    //2. 콘솔에 movies를 어떻게 바로찍을 수 있는지?
-
-    this.setState({movies, isLoading:false})
-    // movies = movies : movies 
+    this.setState({movies, isLoading:false});
   }
   componentDidMount(){
     this.getMovies();
   }
   render() {
+    const {isLoading, movies} = this.state;
     return (
-      <div>
-        {this.state.isLoading ? "Loading..." : "We are ready"}
-      </div>
+      <section className="container">
+        {isLoading ? (
+          <div className="loader">
+            <span className="loader__text">Loading...</span>
+          </div> 
+          ) : ( 
+          <div className="movie-area">
+            {movies.map(movie => (
+              <Movie 
+                key={movie.id} 
+                id={movie.id} 
+                year={movie.year} 
+                title={movie.title} 
+                summary={movie.summary} 
+                poster={movie.medium_cover_image} 
+                genres={movie.genres}
+                />
+            ))}
+          </div>
+        )}
+      </section>
     );
   }
 }

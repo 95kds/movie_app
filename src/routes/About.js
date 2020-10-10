@@ -1,9 +1,13 @@
 import React from 'react';
+import './About.css'
 
 
 function About(props){
-    console.log(props);
-    return <span>About this page: gg</span>
+    return (
+        <div class="about-container">
+            <span>About this page: Movie list</span>
+        </div>
+    )
 }
 
 export default About;

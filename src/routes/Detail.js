@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 class Detail extends React.Component{
     
@@ -9,18 +9,18 @@ class Detail extends React.Component{
         }
     }
     render() {
-        const {location} = this.props;
-        if(location.state){
+        const {locationState} = this.props.state;
+        if(locationState){
             return(
             <div className="movie detail">
-                <img src={location.state.poster} alt={location.state.title}/>
+                <img src={locationState.poster} alt={locationState.title}/>
                 <div className="movie-info">
-                    <h3 className="title">{location.state.title}</h3>
-                    <span className="year">{location.state.year}</span>
-                    <p className="summary">{location.state.summary}</p>
+                    <h3 className="title">{locationState.title}</h3>
+                    <span className="year">{locationState.year}</span>
+                    <p className="summary">{locationState.summary}</p>
                     <p className="genres">
                         {
-                            location.state.genres.map((item, index) => (
+                            locationState.genres.map((item, index) => (
                             <span key={index} className="tag"> #{item} </span>
                             ))
                         }

@@ -9,7 +9,9 @@ class Home extends React.Component {
     movies: []
   };
   getMovies = async () =>{
-    const {data:{data:{movies}}} = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+    const getAxios = axios;
+    const url = "https://yts-proxy.now.sh/list_movies.json";
+    const {data:{data:{movies}}} = await getAxios.get(url);
     this.setState({movies, isLoading:false});
   }
   componentDidMount(){
